@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handler Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/handlerDashboard.js" defer></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Event Handler Dashboard</h1>
+        <p>Review all committee forms:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Form ID</th>
+                    <th>Event Name</th>
+                    <th>Committee</th>
+                    <th>Mentor Status</th>
+                    <th>Your Action</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="handlerTableBody">
+                <!-- Dynamically populated -->
+            </tbody>
+        </table>
+        
+        <a href="/logout" id="logoutBtn" class="logout-btn">Logout</a>
+    </div>
+
+    <!-- Approval Modal -->
+    <div id="handlerModal" class="modal">
+        <div class="modal-content">
+            <h2 id="handlerModalTitle">Approve/Reject Form</h2>
+            <div id="mentorFeedback" class="feedback-section"></div>
+            <textarea id="handlerComment" placeholder="Enter your comments..."></textarea>
+            <div class="modal-actions">
+                <button id="handlerSubmitBtn" class="submit-btn">Submit</button>
+                <button id="handlerCancelBtn" class="cancell-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/adminDashboard.js" defer></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Admin Dashboard</h1>
+        
+        <!-- collapsible Events Section -->
+        <div class="collapsible-section">
+            <div class="section-header" id="eventsHeader">
+                <h2>Event Forms</h2>
+                <span class="toggle-arrow">▼</span>
+            </div>
+            
+            <div class="section-content" id="eventsContent">
+                <p>Review and manage submitted event forms:</p>
+                <div class="filter-controls">
+                    <label for="statusFilter" class="filter-label">Filter by Status:</label>
+                    <select id="statusFilter" class="filter-select">
+                        <option value="all">All Events</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Form ID</th>
+                            <th>Event Name</th>
+                            <th>Submitted By</th>
+                            <th>Mentor Status</th>
+                            <th>Handler Status</th>
+                            <th>Date Submitted</th>
+                            <th>Final Status</th>
+                            <th>Actions</th>
+                            <th style="width: 100px;">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="formTableBody">
+                        <!-- Rows will be dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <h2 class="stats-title">Committee Statistics</h2>
+            <table id="committeeStats">
+                <thead>
+                    <tr>
+                        <th>Committee</th>
+                        <th>Total Events</th>
+                        <th>Approved</th>
+                        <th>Rejected</th>
+                        <th>Avg Duration (Days)</th>
+                    </tr>
+                </thead>
+                <tbody id="statsBody"></tbody>
+            </table>
+        </div>
+        
+        <a href="/logout" id="logoutBtn" class="logout-btn">Logout</a>
+    </div>
+    <div id="commentModal" class="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Add Comment</h2>  <!-- Added id here -->
+        <textarea id="commentText" placeholder="Enter your comment here..."></textarea>
+        <div class="modal-actions">
+            <button id="submitComment" class="approve-btn">Submit</button>
+            <button id="cancelComment" class="cancell-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

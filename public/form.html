@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Form</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/formScript.js" defer></script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Event Form</h1>
+        <form id="mainForm" action="/submit-event" method="POST" onsubmit="return validateMainForm()">
+            <div class="form-group">
+                <label for="dateFilled">Date Filled:</label>
+                <input type="text" id="dateFilled" name="dateFilled" placeholder="Enter date filled (e.g., DD-MM-YYYY)">
+                <span class="error" id="dateFilledError"></span>
+            </div>
+            <div class="form-group">
+                <label for="eventName">Event Meeting Name:</label>
+                <input type="text" id="eventName" name="eventName" placeholder="Enter event meeting name">
+                <span class="error" id="eventNameError"></span>
+            </div>
+            <div class="form-group">
+                <label for="committeeName">Name of Committee/School & Section:</label>
+                <input type="text" id="committeeName" name="committeeName" placeholder="Enter committee/school & section">
+                <span class="error" id="committeeNameError"></span>
+            </div>
+
+<div class="form-group">
+    <label for="venue">Name of Hall/Venue:</label>
+    <select id="venue" name="venue" required>
+        <option value="">Select a venue</option>
+        <option value="Classroom (CR)">Classroom (CR)</option>
+        <option value="Class Lab (CL)">Class Lab (CL)</option>
+        <option value="Computer Classroom (CC)">Computer Classroom (CC)</option>
+        <option value="Library">Library</option>
+        <option value="Conference Room">Conference Room</option>
+        <option value="Big Seminar Hall">Big Seminar Hall</option>
+        <option value="Small Seminar Hall">Small Seminar Hall</option>
+        <option value="Canopy">Canopy</option>
+        <option value="Canteen">Canteen</option>
+    </select>
+    <span class="error" id="venueError"></span>
+</div>
+            <div class="form-group">
+                <label for="dateFrom">Date From:</label>
+                <input type="text" id="dateFrom" name="dateFrom" placeholder="Enter date from (e.g., DD-MM-YYYY)">
+                <span class="error" id="dateFromError"></span>
+            </div>
+            <div class="form-group">
+                <label for="dateTo">Date To:</label>
+                <input type="text" id="dateTo" name="dateTo" placeholder="Enter date to (e.g., DD-MM-YYYY)">
+                <span class="error" id="dateToError"></span>
+            </div>
+            <div class="form-group">
+                <label for="timeSlot">Time Slot:</label>
+                <input type="text" id="timeSlot" name="timeSlot" placeholder="Enter time slot">
+                <span class="error" id="timeSlotError"></span>
+            </div>
+            <div class="form-group">
+                <label for="duration">Duration:</label>
+                <input type="text" id="duration" name="duration" placeholder="Enter duration">
+                <span class="error" id="durationError"></span>
+            </div>
+            <div class="form-group">
+                <label for="extraRequirements">Extra Requirements:</label>
+                <textarea id="extraRequirements" name="extraRequirements" rows="4" placeholder="Enter any extra requirements"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="cateringRequirements">Catering Requirements:</label>
+                <textarea id="cateringRequirements" name="cateringRequirements" rows="4" placeholder="Enter catering requirements"></textarea>
+            </div>
+
+            <div id="availabilityMessage"></div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        <a href="studentHome.html" class="home-link">Go Back to Home Page</a>
+    </div>
+</body>
+</html>
