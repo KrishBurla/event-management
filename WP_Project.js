@@ -3,6 +3,7 @@ const path = require('path');
 const mysql = require('mysql2/promise');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const sendDecisionEmail = require('./sendMail');
 require('dotenv').config();
 
 
@@ -123,14 +124,15 @@ async function initializeDatabase() {
     
     // Sample committees
     await connection.execute(`
-      INSERT IGNORE INTO committees (name, school, section) VALUES
-        ('Sports Committee', 'Main School', 'Athletics'),
-        ('Cultural Committee', 'Arts Department', 'Performing Arts'),
-        ('Colloquium Committee', 'Science Department', 'Research')
-      ON DUPLICATE KEY UPDATE 
-        school = VALUES(school), 
-        section = VALUES(section)
-    `);
+      INSERT IGNORE INTO committees (name, school, section, email) VALUES
+        ('Sports Committee', 'Main School', 'Athletics', 'krishburla@gmail.com'),
+        ('Cultural Committee', 'Arts Department', 'Performing Arts', 'krishburla6@gmail.com'),
+        ('Colloquium Committee', 'Science Department', 'Research', 'krishburla4@gmail.com')
+    ON DUPLICATE KEY UPDATE 
+      school = VALUES(school), 
+      section = VALUES(section),
+      email = VALUES(email)
+  `);
 
     // Sample users including mentors and handler
     const sampleUsers = [
@@ -373,7 +375,7 @@ app.get('/handler/dashboard-data', requireEventHandler, async (req, res) => {
   }
 });
 
-// Mentor update status - fix this route
+// Mentor update status 
 app.post('/mentor/update-status', requireMentor, async (req, res) => {
   try {
     const { eventId, action, comment } = req.body;
@@ -396,7 +398,7 @@ app.post('/mentor/update-status', requireMentor, async (req, res) => {
 
     const connection = await mysql.createConnection(dbConfig);
     
-    // Convert action to status value
+
     const statusValue = action === 'approve' ? 'approved' : 'rejected';
     
     const [result] = await connection.execute(
@@ -535,25 +537,30 @@ app.get('/admin/dashboard-data', requireAdmin, async (req, res) => {
   }
 });
 
-// Admin update status
 app.post('/admin/update-status', requireAdmin, async (req, res) => {
   try {
     const { eventId, status, comment } = req.body;
-    
-    // First get the current event status
+
     const connection = await mysql.createConnection(dbConfig);
+    
+    // Get event details including committee email
     const [event] = await connection.execute(
-      'SELECT mentor_status, handler_status, status_id FROM events e JOIN status s ON e.status_id = s.id WHERE e.id = ?',
+      `SELECT e.event_name, e.mentor_status, e.handler_status, c.email as committee_email, 
+       s.name AS status_name 
+       FROM events e 
+       JOIN committees c ON e.committee_id = c.id
+       JOIN status s ON e.status_id = s.id 
+       WHERE e.id = ?`,
       [eventId]
     );
-    
+
     if (event.length === 0) {
       await connection.end();
       return res.status(404).json({ error: 'Event not found' });
     }
-    
+
     const currentEvent = event[0];
-    
+
     // If trying to approve, check mentor and handler status
     if (status === 'Approved') {
       if (currentEvent.mentor_status !== 'approved' || currentEvent.handler_status !== 'approved') {
@@ -568,25 +575,35 @@ app.post('/admin/update-status', requireAdmin, async (req, res) => {
         });
       }
     }
-    
-    // Get the status ID
+
     const [statusRecord] = await connection.execute(
       "SELECT id FROM status WHERE name = ?",
       [status]
     );
-    
+
     if (statusRecord.length === 0) {
       await connection.end();
       return res.status(400).json({ error: 'Invalid status' });
     }
-    
+
     await connection.execute(
       'UPDATE events SET status_id = ?, admin_comment = ? WHERE id = ?',
       [statusRecord[0].id, comment || null, eventId]
     );
-    
+
+    // Send email after update if there's a committee email
+    if (currentEvent.committee_email) {
+      sendDecisionEmail(
+        currentEvent.committee_email, 
+        currentEvent.event_name, 
+        status.toLowerCase(),
+        comment
+      );
+    }
+
     await connection.end();
     res.json({ success: true });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Update failed' });
