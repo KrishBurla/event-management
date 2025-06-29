@@ -18,7 +18,6 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-
 body::before {
   content: '';
   position: fixed;
@@ -37,22 +36,17 @@ body::before {
 .dashboard-container,
 .home-container,
 .event-details-container {
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff;
   border-radius: 16px;
-  border-left: 4px solid transparent;
-  background-clip: padding-box;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   box-shadow:
-    0 6px 16px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    0 8px 16px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(0, 0, 0, 0.05);
   padding: 30px 25px;
   margin: 0 auto;
   text-align: center;
   transition: all 0.4s ease, transform 0.4s ease;
   animation: slideIn 0.6s ease-out forwards;
   opacity: 0;
-  border-image: linear-gradient(to bottom, #4CAF50, #2196F3) 1;
 }
 
 .login-container:hover,
@@ -63,10 +57,8 @@ body::before {
 .event-details-container:hover {
   transform: translateY(-6px);
   box-shadow:
-    0 12px 20px rgba(0, 0, 0, 0.3),
-    0 0 12px rgba(76, 175, 80, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  border-left: 4px solid #4CAF50;
+    0 12px 20px rgba(0, 0, 0, 0.25),
+    inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .login-container { width: 400px; }
