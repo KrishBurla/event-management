@@ -1,10 +1,9 @@
 /* Base Styles (unchanged) */
 body {
   font-family: Arial, sans-serif;
-  background-image: url('https://portal.svkm.ac.in/usermgmt/resources/images/login-bg.jpg');
-  background: linear-gradient(-45deg, #2c3e50, #4b79cf, #334d50, #3a7bd5);
+  background: linear-gradient(-45deg, #1e3c72, #2a5298, #3a6073, #16222A);
   background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  animation: gradientBG 10s ease infinite;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -12,13 +11,13 @@ body {
   margin: 0;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #2c3e50;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   transition: all 0.3s ease-in-out;
 }
+
 
 body::before {
   content: '';
@@ -38,20 +37,22 @@ body::before {
 .dashboard-container,
 .home-container,
 .event-details-container {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  border-left: 4px solid transparent;
+  background-clip: padding-box;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.1),       /* main drop shadow */
-    0 1px 3px rgba(0, 0, 0, 0.08),      /* soft base shadow */
-    inset 0 1px 0 rgba(255, 255, 255, 0.6); /* subtle inner light at top */
-  padding: 20px;
+    0 6px 16px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  padding: 30px 25px;
   margin: 0 auto;
   text-align: center;
-  transition: all 0.3s ease, transform 0.3s ease;
+  transition: all 0.4s ease, transform 0.4s ease;
   animation: slideIn 0.6s ease-out forwards;
   opacity: 0;
-  backdrop-filter: blur(8px);
+  border-image: linear-gradient(to bottom, #4CAF50, #2196F3) 1;
 }
 
 .login-container:hover,
@@ -60,11 +61,12 @@ body::before {
 .dashboard-container:hover,
 .home-container:hover,
 .event-details-container:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   box-shadow:
-    0 6px 16px rgba(0, 0, 0, 0.15),
-    0 2px 6px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    0 12px 20px rgba(0, 0, 0, 0.3),
+    0 0 12px rgba(76, 175, 80, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-left: 4px solid #4CAF50;
 }
 
 .login-container { width: 400px; }
@@ -617,7 +619,9 @@ table td:nth-child(5) {
 
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
+  25% { background-position: 50% 50%; }
   50% { background-position: 100% 50%; }
+  75% { background-position: 50% 50%; }
   100% { background-position: 0% 50%; }
 }
 
