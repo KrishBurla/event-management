@@ -2,7 +2,9 @@
 body {
   font-family: Arial, sans-serif;
   background-image: url('https://portal.svkm.ac.in/usermgmt/resources/images/login-bg.jpg');
-  background-size: cover;
+  background: linear-gradient(-45deg, #2c3e50, #4b79cf, #334d50, #3a7bd5);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -605,6 +607,12 @@ table td:nth-child(5) {
 @keyframes slideIn {
     from { transform: translateX(100%); }
     to { transform: translateX(0); }
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @keyframes slideIn {
