@@ -99,7 +99,7 @@ function renderEvents(events) {
 
 function renderStatusBadge(status) {
     if (!status || status === 'pending') {
-        return '<span class="status-badge pending">⏳ Pending</span>';
+        return '<span class="status-badge pending status-tag">⏳ Pending</span>';
     }
     return status === 'approved' 
         ? '<span class="status-badge approved">✅ Approved</span>'
