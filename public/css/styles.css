@@ -38,27 +38,35 @@ body::before {
 .dashboard-container,
 .home-container,
 .event-details-container {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px 6px 12px 6px; /* asymmetric rounded corners */
+  box-shadow: 
+    4px 4px 8px rgba(0, 0, 0, 0.1),     /* soft outer shadow */
+    -4px -4px 8px rgba(255, 255, 255, 0.5), /* soft light highlight */
+    inset 0 2px 4px rgba(0, 0, 0, 0.05);    /* subtle inner shadow */
+  backdrop-filter: blur(8px); /* enhanced blur */
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 20px;
   margin: 0 auto;
   text-align: center;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out, transform 0.3s ease;
   animation: slideIn 0.6s ease-out forwards;
-  opacity: 0; /* Start invisible and fade in */
+  opacity: 0;
 }
 
 /* Added subtle hover effect for containers */
+/* Micro-interaction hover effect */
 .login-container:hover,
 .form-container:hover,
 .status-container:hover,
 .dashboard-container:hover,
 .home-container:hover,
 .event-details-container:hover {
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px); /* gentle float effect */
+  box-shadow: 
+    6px 6px 12px rgba(0, 0, 0, 0.15),
+    -6px -6px 12px rgba(255, 255, 255, 0.6),
+    inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .login-container { width: 400px; }
