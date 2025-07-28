@@ -1,108 +1,84 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/js/theme.js"></script>
-  <script>
-    // Enable Tailwind dark mode toggle
-    tailwind.config = {
-      darkMode: 'class'
-    };
-    function toggleTheme() {
-      document.documentElement.classList.toggle('dark');
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/adminDashboard.js" defer></script>
 </head>
-<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white min-h-screen font-sans p-6">
-
-  <!-- Header -->
-  <header class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-bold">Admin Dashboard</h1>
-    <button onclick="toggleTheme()">Toggle Light/Dark Mode</button>
-  </header>
-
-  <!-- Event Forms Section -->
-  <section class="mb-10 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
-    <div class="flex items-center justify-between cursor-pointer" id="eventsHeader">
-      <h2 class="text-xl font-semibold">Event Forms</h2>
-      <span class="text-lg">&#x25BC;</span>
+<body>
+    <div class="dashboard-container">
+        <h1>Admin Dashboard</h1>
+        
+        <!-- collapsible Events Section -->
+        <div class="collapsible-section">
+            <div class="section-header" id="eventsHeader">
+                <h2>Event Forms</h2>
+                <span class="toggle-arrow">▼</span>
+            </div>
+            
+            <div class="section-content" id="eventsContent">
+                <p>Review and manage submitted event forms:</p>
+                <div class="filter-controls">
+                    <label for="statusFilter" class="filter-label">Filter by Status:</label>
+                    <select id="statusFilter" class="filter-select">
+                        <option value="all">All Events</option>
+                        <option value="Pending" class="status-tag">Pending</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Form ID</th>
+                            <th>Event Name</th>
+                            <th>Submitted By</th>
+                            <th>Mentor Status</th>
+                            <th>Handler Status</th>
+                            <th>Date Submitted</th>
+                            <th>Final Status</th>
+                            <th>Actions</th>
+                            <th style="width: 100px;">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="formTableBody">
+                        <!-- Rows will be dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <h2 class="stats-title">Committee Statistics</h2>
+            <table id="committeeStats">
+                <thead>
+                    <tr>
+                        <th>Committee</th>
+                        <th>Total Events</th>
+                        <th>Approved</th>
+                        <th>Rejected</th>
+                        <th>Avg Duration (Days)</th>
+                    </tr>
+                </thead>
+                <tbody id="statsBody"></tbody>
+            </table>
+        </div>
+        
+        <a href="/logout" id="logoutBtn" class="logout-btn">Logout</a>
     </div>
-
-    <div class="mt-4" id="eventsContent">
-      <p class="mb-4">Review and manage submitted event forms:</p>
-
-      <div class="flex items-center gap-3 mb-4">
-        <label for="statusFilter" class="text-sm">Filter by Status:</label>
-        <select id="statusFilter" class="bg-gray-100 dark:bg-gray-700 dark:text-white px-3 py-2 rounded-md">
-          <option value="all">All Events</option>
-          <option value="Pending">Pending</option>
-          <option value="Approved">Approved</option>
-          <option value="Rejected">Rejected</option>
-        </select>
-      </div>
-
-      <div class="overflow-auto rounded-md border dark:border-gray-600">
-        <table class="w-full text-left text-sm">
-          <thead class="bg-gray-100 dark:bg-gray-700">
-            <tr>
-              <th class="p-3">Form ID</th>
-              <th class="p-3">Event Name</th>
-              <th class="p-3">Submitted By</th>
-              <th class="p-3">Mentor Status</th>
-              <th class="p-3">Handler Status</th>
-              <th class="p-3">Date Submitted</th>
-              <th class="p-3">Final Status</th>
-              <th class="p-3">Actions</th>
-              <th class="p-3">Delete</th>
-            </tr>
-          </thead>
-          <tbody id="formTableBody" class="divide-y dark:divide-gray-700">
-            <!-- Dynamic rows inserted here -->
-          </tbody>
-        </table>
-      </div>
+    <div id="commentModal" class="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Add Comment</h2>  <!-- Added id here -->
+        <textarea id="commentText" placeholder="Enter your comment here..."></textarea>
+        <div class="modal-actions">
+            <button id="submitComment" class="approve-btn">Submit</button>
+            <button id="cancelComment" class="cancell-btn">Cancel</button>
+        </div>
     </div>
-  </section>
-
-  <!-- Committee Stats Section -->
-  <section class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-10">
-    <h2 class="text-xl font-semibold mb-4">Committee Statistics</h2>
-    <div class="overflow-auto rounded-md border dark:border-gray-600">
-      <table class="w-full text-left text-sm">
-        <thead class="bg-gray-100 dark:bg-gray-700">
-          <tr>
-            <th class="p-3">Committee</th>
-            <th class="p-3">Total Events</th>
-            <th class="p-3">Approved</th>
-            <th class="p-3">Rejected</th>
-            <th class="p-3">Avg Duration (Days)</th>
-          </tr>
-        </thead>
-        <tbody id="statsBody" class="divide-y dark:divide-gray-700"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Logout -->
-  <div class="text-right">
-    <a href="/logout" class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md">Logout</a>
-  </div>
-
-  <!-- Modal -->
-  <div id="commentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-md w-full max-w-md shadow-lg">
-      <h2 id="modalTitle" class="text-lg font-bold mb-4">Add Comment</h2>
-      <textarea id="commentText" class="w-full p-2 rounded-md border dark:border-gray-600 dark:bg-gray-700" rows="4" placeholder="Enter your comment here..."></textarea>
-      <div class="flex justify-end gap-3 mt-4">
-        <button id="submitComment" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">Submit</button>
-        <button id="cancelComment" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-md">Cancel</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="/js/adminDashboard.js" defer></script>
+</div>
 </body>
 </html>
