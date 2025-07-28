@@ -1,21 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="transition duration-300">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Home</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <script src="/js/script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    };
+  </script>
+  <script src="/js/script.js" defer></script>
 </head>
-<body>
-    <div class="home-container">
-        <h1>Welcome to the Student Home Page</h1>
-        <p>Select an option below:</p>
-        <div class="link-container">
-            <a href="form.html" class="home-link">Go to Event Form</a>
-            <a href="status.html" class="home-link">View Status Page</a>
-            <a href="index.html" class="home-link">Logout</a>
-        </div>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen flex items-center justify-center transition duration-300">
+
+  <div class="text-center p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-lg">
+    <h1 class="text-3xl font-bold mb-4">Welcome to the Student Home Page</h1>
+    <p class="mb-6 text-gray-700 dark:text-gray-300">Select an option below:</p>
+
+    <div class="flex flex-col gap-4">
+      <a href="form.html" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold">
+        Go to Event Form
+      </a>
+      <a href="status.html" class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold">
+        View Status Page
+      </a>
+      <a href="index.html" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold">
+        Logout
+      </a>
     </div>
+
+    <button onclick="document.documentElement.classList.toggle('dark')" class="mt-6 text-sm text-gray-600 dark:text-gray-400 hover:underline">
+      Toggle Light/Dark Mode
+    </button>
+  </div>
+
 </body>
 </html>
