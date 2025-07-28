@@ -1,150 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Event Form</title>
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/js/theme.js"></script>
-  <script>
-    tailwind.config = { darkMode: 'class' };
-  </script>
-
-  <!-- Light/Dark Mode Toggle Script -->
-  <script>
-    function toggleDarkMode() {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-    }
-    window.onload = () => {
-      if (localStorage.getItem('theme') === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    };
-  </script>
-
-  <!-- Your custom form validation -->
-  <script src="/js/formScript.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/viewEvent.js" defer></script>
 </head>
-
-<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition duration-300 min-h-screen">
-
-  <!-- Header -->
-  <header class="flex items-center justify-between p-6 bg-gray-100 dark:bg-gray-800 shadow">
-    <h1 class="text-2xl font-bold">Event Submission Form</h1>
-    <button onclick="toggleTheme()">Toggle Light/Dark Mode</button>
-  </header>
-
-  <!-- Form Container -->
-  <main class="max-w-4xl mx-auto p-6 mt-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md">
-    <form id="mainForm" action="/submit-event" method="POST" onsubmit="return validateMainForm()" class="space-y-5">
-
-      <!-- FIELD GROUPS -->
-      <div>
-        <label for="dateFilled" class="block font-medium">Date Filled</label>
-        <input type="text" id="dateFilled" name="dateFilled" placeholder="DD-MM-YYYY"
-          class="w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
-        <span class="text-red-500 text-sm" id="dateFilledError"></span>
-      </div>
-
-      <div>
-        <label for="eventName" class="block font-medium">Event Meeting Name</label>
-        <input type="text" id="eventName" name="eventName" placeholder="Enter event meeting name"
-          class="w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
-        <span class="text-red-500 text-sm" id="eventNameError"></span>
-      </div>
-
-      <div>
-        <label for="committeeName" class="block font-medium">Committee/School & Section</label>
-        <input type="text" id="committeeName" name="committeeName" placeholder="Enter committee/school & section"
-          class="w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
-        <span class="text-red-500 text-sm" id="committeeNameError"></span>
-      </div>
-
-      <div>
-        <label for="venue" class="block font-medium">Venue</label>
-        <select id="venue" name="venue" required
-          class="w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
-          <option value="">Select a venue</option>
-          <option value="Classroom (CR)">Classroom (CR)</option>
-          <option value="Class Lab (CL)">Class Lab (CL)</option>
-          <option value="Computer Classroom (CC)">Computer Classroom (CC)</option>
-          <option value="Library">Library</option>
-          <option value="Conference Room">Conference Room</option>
-          <option value="Big Seminar Hall">Big Seminar Hall</option>
-          <option value="Small Seminar Hall">Small Seminar Hall</option>
-          <option value="Canopy">Canopy</option>
-          <option value="Canteen">Canteen</option>
-        </select>
-        <span class="text-red-500 text-sm" id="venueError"></span>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label for="dateFrom" class="block font-medium">Date From</label>
-          <input type="text" id="dateFrom" name="dateFrom" placeholder="DD-MM-YYYY"
-            class="w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
-          <span class="text-red-500 text-sm" id="dateFromError"></span>
+<body>
+    <div class="form-container">
+        <div class="event-details-container">
+            <h1>Event Details</h1>
+            <div id="eventDetails"></div>
         </div>
-
-        <div>
-          <label for="dateTo" class="block font-medium">Date To</label>
-          <input type="text" id="dateTo" name="dateTo" placeholder="DD-MM-YYYY"
-            class="w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
-          <span class="text-red-500 text-sm" id="dateToError"></span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label for="timeSlot" class="block font-medium">Time Slot</label>
-          <input type="text" id="timeSlot" name="timeSlot" placeholder="Enter time slot"
-            class="w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
-          <span class="text-red-500 text-sm" id="timeSlotError"></span>
-        </div>
-
-        <div>
-          <label for="duration" class="block font-medium">Duration</label>
-          <input type="text" id="duration" name="duration" placeholder="Enter duration"
-            class="w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
-          <span class="text-red-500 text-sm" id="durationError"></span>
-        </div>
-      </div>
-
-      <div>
-        <label for="extraRequirements" class="block font-medium">Extra Requirements</label>
-        <textarea id="extraRequirements" name="extraRequirements" rows="3"
-          class="w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
-          placeholder="Enter any extra requirements"></textarea>
-      </div>
-
-      <div>
-        <label for="cateringRequirements" class="block font-medium">Catering Requirements</label>
-        <textarea id="cateringRequirements" name="cateringRequirements" rows="3"
-          class="w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
-          placeholder="Enter catering requirements"></textarea>
-      </div>
-
-      <div id="availabilityMessage" class="text-center text-sm text-blue-500"></div>
-
-      <!-- Submit Button -->
-      <div class="flex flex-col items-center gap-2">
-        <button type="submit"
-          class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition font-semibold shadow">
-          Submit
-        </button>
-        <a href="studentHome.html" class="text-blue-500 hover:underline">← Go Back to Home Page</a>
-      </div>
-    </form>
-  </main>
-
-  <!-- Footer -->
-  <footer class="text-center py-4 mt-10 bg-gray-100 dark:bg-gray-800 text-sm text-gray-600 dark:text-gray-400">
-    © 2025 Event Management Team
-  </footer>
+    </div>
 </body>
 </html>
