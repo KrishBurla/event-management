@@ -1,47 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Handler Dashboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <script src="/js/handlerDashboard.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Handler Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/handlerDashboard.js" defer></script>
 </head>
-<body>
-    <div class="dashboard-container">
-        <h1>Event Handler Dashboard</h1>
-        <p>Review all committee forms:</p>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Form ID</th>
-                    <th>Event Name</th>
-                    <th>Committee</th>
-                    <th>Mentor Status</th>
-                    <th>Your Action</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="handlerTableBody">
-                <!-- Dynamically populated -->
-            </tbody>
-        </table>
-        
-        <a href="/logout" id="logoutBtn" class="logout-btn">Logout</a>
+<body class="bg-gray-100 min-h-screen font-sans">
+  <div class="max-w-6xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Event Handler Dashboard</h1>
+    <p class="mb-6 text-gray-600">Review all committee forms:</p>
+
+    <div class="overflow-x-auto bg-white shadow rounded-lg">
+      <table class="w-full text-left border border-gray-200">
+        <thead class="bg-gray-50 text-gray-700">
+          <tr>
+            <th class="py-3 px-4 border-b">Form ID</th>
+            <th class="py-3 px-4 border-b">Event Name</th>
+            <th class="py-3 px-4 border-b">Committee</th>
+            <th class="py-3 px-4 border-b">Mentor Status</th>
+            <th class="py-3 px-4 border-b">Your Action</th>
+            <th class="py-3 px-4 border-b">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="handlerTableBody" class="text-gray-600">
+          <!-- Dynamically populated -->
+        </tbody>
+      </table>
     </div>
 
-    <!-- Approval Modal -->
-    <div id="handlerModal" class="modal">
-        <div class="modal-content">
-            <h2 id="handlerModalTitle">Approve/Reject Form</h2>
-            <div id="mentorFeedback" class="feedback-section"></div>
-            <textarea id="handlerComment" placeholder="Enter your comments..."></textarea>
-            <div class="modal-actions">
-                <button id="handlerSubmitBtn" class="submit-btn">Submit</button>
-                <button id="handlerCancelBtn" class="cancell-btn">Cancel</button>
-            </div>
-        </div>
+    <div class="mt-6 text-right">
+      <a href="/logout" id="logoutBtn" class="inline-block bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
+        Logout
+      </a>
     </div>
+  </div>
+
+  <!-- Approval Modal -->
+  <div id="handlerModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40 z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+      <h2 id="handlerModalTitle" class="text-xl font-bold mb-4">Approve/Reject Form</h2>
+      
+      <div id="mentorFeedback" class="mb-4 text-sm text-gray-600 feedback-section">
+        <!-- Optional mentor feedback -->
+      </div>
+
+      <textarea id="handlerComment" rows="4" class="w-full border border-gray-300 rounded-md p-3 text-sm focus:ring-2 focus:ring-blue-400" placeholder="Enter your comments..."></textarea>
+      
+      <div class="flex justify-end mt-4 gap-2 modal-actions">
+        <button id="handlerSubmitBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded">
+          Submit
+        </button>
+        <button id="handlerCancelBtn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold px-4 py-2 rounded">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
