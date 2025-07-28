@@ -1,40 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Hub Login</title>
-    <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Management</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Optional: Enable dark mode via class strategy -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    };
+  </script>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    // On page load
+    window.onload = () => {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+  </script>
 </head>
-<body>
-    <div class="login-container">
-        <div class="welcome-message">
-            <h2>Welcome to the Event Hub</h2>
-            <p>Your gateway to organizing amazing university events</p>
-        </div>
-        
-        <h1>Login</h1>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username">
-                <span class="error" id="usernameError"></span>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password">
-                <span class="error" id="passwordError"></span>
-            </div>
-            <span class="error" id="formError"></span>
-            <button type="submit" class="login-btn">Login</button>
-        </form>
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300 min-h-screen">
 
-        <div class="support-info">
-            <p>For any support queries please contact:<br>
-            <a href="mailto:eventsupport@youruniversity.edu">eventsupport@youruniversity.edu</a></p>
-        </div>
+  <!-- Header -->
+  <header class="flex items-center justify-between p-6 bg-gray-100 dark:bg-gray-800 shadow">
+    <h1 class="text-2xl font-bold">Event Management System</h1>
+    <button onclick="toggleDarkMode()" class="p-2 rounded bg-gray-300 dark:bg-gray-700 text-black dark:text-white hover:bg-gray-400 dark:hover:bg-gray-600 transition">
+      🌙 Toggle Theme
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex flex-col items-center justify-center py-20 px-6">
+    <h2 class="text-3xl font-semibold mb-6">Welcome to the Event Management Portal</h2>
+    <p class="text-lg mb-10 max-w-xl text-center text-gray-700 dark:text-gray-300">
+      Manage college events seamlessly with streamlined submissions, approval workflows, and personalized dashboards.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4">
+      <a href="form.html" class="px-6 py-3 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition">Submit an Event</a>
+      <a href="login.html" class="px-6 py-3 bg-green-600 text-white rounded shadow hover:bg-green-700 transition">Login as Committee</a>
     </div>
+  </main>
 
-    <script src="/js/script.js" defer></script>
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-gray-100 dark:bg-gray-800 text-sm text-gray-600 dark:text-gray-400">
+    © 2025 Event Management Team
+  </footer>
 </body>
 </html>
