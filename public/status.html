@@ -1,59 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" class="transition duration-300">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Event Form Status</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/js/theme.js"></script>
-  <script>
-    // Enable Tailwind dark mode class strategy
-    tailwind.config = {
-      darkMode: 'class',
-    };
-  </script>
-  <script src="/js/status.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Form Status</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/status.js"></script>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen flex flex-col items-center py-10 transition duration-300">
-  
-  <!-- Toggle Button -->
-  <button onclick="toggleTheme()" class="mb-6 px-4 py-2 rounded-lg border border-gray-400 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-    Toggle Light/Dark Mode
-  </button>
-
-  <div class="w-full max-w-6xl px-4">
-    <h1 class="text-3xl font-bold text-center mb-6">Event Form Status</h1>
-    
-    <div class="overflow-x-auto rounded-xl shadow-lg">
-      <table class="w-full text-left border-collapse bg-white dark:bg-gray-800">
-        <thead class="bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-200">
-          <tr>
-            <th class="px-6 py-3">Event Name</th>
-            <th class="px-6 py-3">Date Filled</th>
-            <th class="px-6 py-3">Venue</th>
-            <th class="px-6 py-3">Date From</th>
-            <th class="px-6 py-3">Date To</th>
-            <th class="px-6 py-3">Status</th>
-            <th class="px-6 py-3">Admin Notes</th>
-          </tr>
-        </thead>
-        <tbody id="statusTableBody" class="text-gray-800 dark:text-gray-100">
-          <!-- Rows will be dynamically added here -->
-        </tbody>
-      </table>
+<body>
+    <div class="status-container">
+        <h1>Event Form Status</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Date Filled</th>
+                    <th>Venue</th>
+                    <th>Date From</th>
+                    <th>Date To</th>
+                    <th>Status</th>
+                    <th>Admin Notes</th>  <!-- New column -->
+                </tr>
+            </thead>
+            <tbody id="statusTableBody">
+                <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+        <a href="studentHome.html" class="home-link">Go to Home Page</a>
     </div>
-
-    <div class="mt-8 text-center">
-      <a href="studentHome.html" class="inline-block text-blue-600 dark:text-blue-400 font-semibold hover:underline">
-        Go to Home Page
-      </a>
-    </div>
-  </div>
-
-  <script>
-    function toggleTheme() {
-      document.documentElement.classList.toggle('dark');
-    }
-  </script>
+    <script src="status.js"></script>
 </body>
 </html>
