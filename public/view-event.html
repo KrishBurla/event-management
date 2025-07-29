@@ -1,18 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Details</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <script src="/js/viewEvent.js" defer></script>
 </head>
 <body>
-    <div class="form-container">
-        <div class="event-details-container">
-            <h1>Event Details</h1>
-            <div id="eventDetails"></div>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo">Event Hub</div>
+            <div class="theme-switch-wrapper">
+                <span>☀️</span>
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" />
+                    <div class="slider round"></div>
+                </label>
+                <span>🌙</span>
+            </div>
         </div>
-    </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div id="eventDetails">
+                </div>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2024 University Event Hub</p>
+    </footer>
+
+    <script src="/js/viewEvent.js"></script>
+    <script src="/js/theme.js"></script>
 </body>
 </html>
