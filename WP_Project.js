@@ -125,7 +125,7 @@ async function initializeDatabase() {
     // Sample committees
     await connection.execute(`
       INSERT IGNORE INTO committees (name, school, section, email) VALUES
-        ('Sports Committee', 'Main School', 'Athletics', 'krishburla@gmail.com'),
+        ('Sports Committee', 'Main School', 'Athletics', 'namanmukul.bhatia16@nmims.in'),
         ('Cultural Committee', 'Arts Department', 'Performing Arts', 'krishburla6@gmail.com'),
         ('Colloquium Committee', 'Science Department', 'Research', 'krishburla4@gmail.com')
     ON DUPLICATE KEY UPDATE 
