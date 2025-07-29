@@ -16,25 +16,84 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Email sending function
+/**
+ * Generates a professional HTML email template.
+ * @param {string} eventName - The name of the event.
+ * @param {string} decision - 'approved' or 'rejected'.
+ * @param {string|null} adminComment - Optional comment from the admin.
+ * @returns {string} - The full HTML content of the email.
+ */
+function createEmailTemplate(eventName, decision, adminComment) {
+    const isApproved = decision === 'approved';
+    const decisionText = isApproved ? 'Approved' : 'Rejected';
+    const title = `Update on Your Event: "${eventName}"`;
+    const mainColor = isApproved ? '#28a745' : '#dc3545';
+
+    return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; }
+            .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border: 1px solid #dee2e6; border-radius: 8px; overflow: hidden; }
+            .header { background-color: ${mainColor}; color: #ffffff; padding: 20px; text-align: center; }
+            .header h1 { margin: 0; font-size: 24px; }
+            .content { padding: 30px; color: #333; line-height: 1.6; }
+            .content h2 { color: ${mainColor}; }
+            .status-box { border: 2px solid ${mainColor}; padding: 15px; border-radius: 5px; text-align: center; margin-bottom: 20px; }
+            .status-box p { margin: 0; font-size: 18px; font-weight: bold; color: ${mainColor}; }
+            .comment-section { background-color: #f1f3f5; padding: 15px; border-radius: 5px; margin-top: 20px; }
+            .footer { background-color: #e9ecef; text-align: center; padding: 15px; font-size: 12px; color: #6c757d; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Event Status Update</h1>
+            </div>
+            <div class="content">
+                <p>Dear Committee,</p>
+                <p>This is an update regarding your application for the event: <strong>"${eventName}"</strong>.</p>
+                <div class="status-box">
+                    <p>Your event has been ${decisionText}</p>
+                </div>
+                ${adminComment ? `
+                <div class="comment-section">
+                    <strong>Administrator's Comment:</strong>
+                    <p style="margin-top: 5px;"><em>${adminComment}</em></p>
+                </div>
+                ` : ''}
+                <p>Thank you for your submission.</p>
+                <p>Best regards,<br>The Event Management Team</p>
+            </div>
+            <div class="footer">
+                <p>&copy; ${new Date().getFullYear()} Your University Event Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    `;
+}
+
+/**
+ * Sends a decision email to the specified recipient.
+ * @param {string} toEmail - The recipient's email address.
+ * @param {string} eventName - The name of the event.
+ * @param {string} decision - 'approved' or 'rejected'.
+ * @param {string|null} adminComment - Optional comment from the admin.
+ */
 function sendDecisionEmail(toEmail, eventName, decision, adminComment = null) {
-  const decisionText = decision === 'approved' ? 'approved' : 'rejected';
-  const subject = `Event Update: ${eventName} has been ${decisionText}`;
-
-  let text = `Dear Committee,\n\n`;
-  text += `Your event "${eventName}" has been ${decisionText} by the administration.\n\n`;
-
-  if (adminComment) {
-    text += `Administrator Comment:\n${adminComment}\n\n`;
-  }
-
-  text += `Thank you for your submission.\n\nBest regards,\nEvent Management System`;
+  const decisionText = decision === 'approved' ? 'Approved' : 'Rejected';
+  const subject = `Event Update: Your Event "${eventName}" has been ${decisionText}`;
+  const htmlBody = createEmailTemplate(eventName, decision, adminComment);
 
   const mailOptions = {
-    from: `"Event Management" <${process.env.EMAIL_USER}>`,
+    from: `"Event Management Hub" <${process.env.EMAIL_USER}>`,
     to: toEmail,
     subject: subject,
-    text: text
+    html: htmlBody // We now send HTML instead of plain text
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
