@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,34 +7,50 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <div class="login-container">
-        <div class="welcome-message">
-            <h2>Welcome to the Event Hub</h2>
-            <p>Your gateway to organizing amazing university events</p>
-        </div>
-        
-        <h1>Login</h1>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username">
-                <span class="error" id="usernameError"></span>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo"><a href="/">Event Hub</a></div>
+            <div class="theme-switch-wrapper">
+                <span>☀️</span>
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" />
+                    <div class="slider round"></div>
+                </label>
+                <span>🌙</span>
             </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password">
-                <span class="error" id="passwordError"></span>
-            </div>
-            <span class="error" id="formError"></span>
-            <button type="submit" class="login-btn">Login</button>
-        </form>
-
-        <div class="support-info">
-            <p>For any support queries please contact:<br>
-            <a href="mailto:eventsupport@youruniversity.edu">eventsupport@youruniversity.edu</a></p>
         </div>
-    </div>
+    </header>
 
-    <script src="/js/script.js" defer></script>
+    <main>
+        <div class="container login-container">
+            <div class="welcome-message">
+                <h2>Welcome to the Event Hub</h2>
+                <p>Your gateway to organizing university events</p>
+            </div>
+            
+            <h1>Login</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username">
+                    <span class="error" id="usernameError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password">
+                    <span class="error" id="passwordError"></span>
+                </div>
+                <span class="error" id="formError"></span>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2024 University Event Hub. For support, contact <a href="mailto:eventsupport@youruniversity.edu">eventsupport@youruniversity.edu</a>.</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/theme.js"></script>
 </body>
 </html>
