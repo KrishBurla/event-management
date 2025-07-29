@@ -411,3 +411,135 @@ tbody tr:hover {
     margin: 0 0.5rem;
   }
 }
+
+/* ADD THIS to the end of your styles.css file */
+
+/* =============================================
+   =            NEW HEADER STYLES              =
+   ============================================= */
+
+.app-header {
+  background: linear-gradient(135deg, var(--light-header-bg), var(--light-card-bg));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+[data-theme="dark"] .app-header {
+    background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Spacing between nav items */
+}
+
+.nav-link {
+    font-family: var(--font-family-sans-serif);
+    background-color: transparent;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--light-text);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+}
+
+.nav-link:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* =============================================
+   =        NEW ANIMATED THEME TOGGLE          =
+   ============================================= */
+
+/* Remove the old emoji-based toggle wrapper */
+.theme-switch-wrapper {
+  display: none;
+}
+
+/* New switch styles */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #73C0FC; /* Light mode bg */
+  border-radius: 28px;
+  transition: background-color 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px;
+}
+
+.toggle-icon svg {
+  width: 18px;
+  height: 18px;
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.toggle-icon .sun {
+  stroke: #FFD700;
+  opacity: 1;
+}
+
+.toggle-icon .moon {
+  stroke: #F5F3CE;
+  opacity: 0;
+}
+
+.toggle-icon::before {
+  content: '';
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  top: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Dark Mode Styles for the Toggle */
+input:checked + .toggle-icon {
+  background-color: #48537c; /* Dark mode bg */
+}
+
+input:checked + .toggle-icon .sun {
+  opacity: 0;
+}
+
+input:checked + .toggle-icon .moon {
+  opacity: 1;
+}
+
+input:checked + .toggle-icon::before {
+  transform: translateX(24px);
+}
