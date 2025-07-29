@@ -1,33 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Form Status</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <script src="/js/status.js"></script>
 </head>
 <body>
-    <div class="status-container">
-        <h1>Event Form Status</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Event Name</th>
-                    <th>Date Filled</th>
-                    <th>Venue</th>
-                    <th>Date From</th>
-                    <th>Date To</th>
-                    <th>Status</th>
-                    <th>Admin Notes</th>  <!-- New column -->
-                </tr>
-            </thead>
-            <tbody id="statusTableBody">
-                <!-- Rows will be dynamically added here -->
-            </tbody>
-        </table>
-        <a href="studentHome.html" class="home-link">Go to Home Page</a>
-    </div>
-    <script src="status.js"></script>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo"><a href="/studentHome.html">Event Hub</a></div>
+             <nav class="header-nav">
+                 <a href="/studentHome.html">Home</a>
+                 <a href="/form.html">New Request</a>
+                 <a href="/index.html">Logout</a>
+                 <div class="theme-switch-wrapper">
+                    <span>☀️</span>
+                    <label class="theme-switch" for="theme-toggle">
+                        <input type="checkbox" id="theme-toggle" />
+                        <div class="slider round"></div>
+                    </label>
+                    <span>🌙</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>My Event Statuses</h1>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Event Name</th>
+                            <th>Date Filled</th>
+                            <th>Venue</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Status</th>
+                            <th>Admin Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statusTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="app-footer">
+        <p>&copy; 2024 University Event Hub</p>
+    </footer>
+
+    <script src="/js/status.js"></script>
+    <script src="/js/theme.js"></script>
 </body>
 </html>
