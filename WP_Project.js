@@ -263,9 +263,18 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.get('/logout', (req, res) => {
-  req.session.destroy();
-  res.redirect('/');
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      // Handle error case, e.g., log it and send a server error response
+      console.error('Session destruction error:', err);
+      return res.status(500).json({ error: 'Could not log out.' });
+    }
+    // The fetch request from the client expects a JSON response to know it was successful
+    // before it redirects. Redirecting here is for non-JS form posts.
+    // For our JS fetch, we'll send a success response. The client will handle the redirect.
+    res.json({ success: true, message: 'Logged out successfully' });
+  });
 });
 
 // Mentor view event data
