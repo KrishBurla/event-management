@@ -1,47 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Handler Dashboard</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <script src="/js/handlerDashboard.js" defer></script>
 </head>
 <body>
-    <div class="dashboard-container">
-        <h1>Event Handler Dashboard</h1>
-        <p>Review all committee forms:</p>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Form ID</th>
-                    <th>Event Name</th>
-                    <th>Committee</th>
-                    <th>Mentor Status</th>
-                    <th>Your Action</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="handlerTableBody">
-                <!-- Dynamically populated -->
-            </tbody>
-        </table>
-        
-        <a href="/logout" id="logoutBtn" class="logout-btn">Logout</a>
-    </div>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo"><a href="/handlerDashboard.html">Event Handler Dashboard</a></div>
+             <nav class="header-nav">
+                 <button id="logoutBtn">Logout</button>
+                 <div class="theme-switch-wrapper">
+                    <span>☀️</span>
+                    <label class="theme-switch" for="theme-toggle">
+                        <input type="checkbox" id="theme-toggle" />
+                        <div class="slider round"></div>
+                    </label>
+                    <span>🌙</span>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-    <!-- Approval Modal -->
+    <main>
+        <div class="container">
+            <h1>Review All Committee Forms</h1>
+            <p>Review event forms that have been approved by their respective mentors.</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Form ID</th>
+                            <th>Event Name</th>
+                            <th>Committee</th>
+                            <th>Mentor Status</th>
+                            <th>Your Action</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="handlerTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2024 University Event Hub</p>
+    </footer>
+
     <div id="handlerModal" class="modal">
         <div class="modal-content">
             <h2 id="handlerModalTitle">Approve/Reject Form</h2>
-            <div id="mentorFeedback" class="feedback-section"></div>
-            <textarea id="handlerComment" placeholder="Enter your comments..."></textarea>
+            <div id="mentorFeedback" class="requirements-section" style="margin-bottom: 1rem;"></div>
+            <div class="form-group">
+                <label for="handlerComment">Comment (Optional)</label>
+                <textarea id="handlerComment" placeholder="Enter your comments..."></textarea>
+            </div>
             <div class="modal-actions">
-                <button id="handlerSubmitBtn" class="submit-btn">Submit</button>
-                <button id="handlerCancelBtn" class="cancell-btn">Cancel</button>
+                <button id="handlerCancelBtn" class="btn btn-secondary">Cancel</button>
+                <button id="handlerSubmitBtn" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>
+
+    <script src="/js/handlerDashboard.js"></script>
+    <script src="/js/theme.js"></script>
 </body>
 </html>
