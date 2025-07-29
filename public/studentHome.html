@@ -1,21 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Home</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <script src="/js/script.js" defer></script>
 </head>
 <body>
-    <div class="home-container">
-        <h1>Welcome to the Student Home Page</h1>
-        <p>Select an option below:</p>
-        <div class="link-container">
-            <a href="form.html" class="home-link">Go to Event Form</a>
-            <a href="status.html" class="home-link">View Status Page</a>
-            <a href="index.html" class="home-link">Logout</a>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo"><a href="/studentHome.html">Event Hub</a></div>
+            <nav class="header-nav">
+                 <a href="/index.html">Logout</a>
+                 <div class="theme-switch-wrapper">
+                    <span>☀️</span>
+                    <label class="theme-switch" for="theme-toggle">
+                        <input type="checkbox" id="theme-toggle" />
+                        <div class="slider round"></div>
+                    </label>
+                    <span>🌙</span>
+                </div>
+            </nav>
         </div>
-    </div>
+    </header>
+
+    <main>
+        <div class="container home-container">
+            <h1>Welcome, Student</h1>
+            <p>Select an option below to get started.</p>
+            <div class="link-container">
+                <a href="form.html" class="btn btn-primary">Request New Event</a>
+                <a href="status.html" class="btn btn-secondary">View My Event Statuses</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="app-footer">
+        <p>&copy; 2024 University Event Hub</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/theme.js"></script>
 </body>
 </html>
