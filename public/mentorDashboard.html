@@ -1,46 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentor Dashboard</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <script src="/js/mentorDashboard.js" defer></script>
 </head>
 <body>
-    <div class="dashboard-container">
-        <h1>Mentor Dashboard</h1>
-        <p>Review forms from your committee:</p>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Form ID</th>
-                    <th>Event Name</th>
-                    <th>Submitted By</th>
-                    <th>Date Submitted</th>
-                    <th>Your Action</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="mentorTableBody">
-                <!-- Dynamically populated -->
-            </tbody>
-        </table>
-        
-        <a href="/logout" id="logoutBtn" class="logout-btn">Logout</a>
-    </div>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo"><a href="/mentorDashboard.html">Mentor Dashboard</a></div>
+             <nav class="header-nav">
+                 <button id="logoutBtn">Logout</button>
+                 <div class="theme-switch-wrapper">
+                    <span>☀️</span>
+                    <label class="theme-switch" for="theme-toggle">
+                        <input type="checkbox" id="theme-toggle" />
+                        <div class="slider round"></div>
+                    </label>
+                    <span>🌙</span>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-    <!-- Approval Modal -->
+    <main>
+        <div class="container">
+            <h1>Review Committee Forms</h1>
+            <p>Review event forms submitted by your assigned committee.</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Form ID</th>
+                            <th>Event Name</th>
+                            <th>Submitted By</th>
+                            <th>Date Submitted</th>
+                            <th>Your Action</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mentorTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2024 University Event Hub</p>
+    </footer>
+
     <div id="mentorModal" class="modal">
         <div class="modal-content">
             <h2 id="modalTitle">Approve/Reject Form</h2>
-            <textarea id="mentorComment" placeholder="Enter your comments..."></textarea>
+             <div class="form-group">
+                <label for="mentorComment">Comment (Optional)</label>
+                <textarea id="mentorComment" placeholder="Enter your comments..."></textarea>
+            </div>
             <div class="modal-actions">
-                <button id="mentorSubmitBtn" class="submit-btn">Submit</button>
-                <button id="mentorCancelBtn" class="cancell-btn">Cancel</button>
+                <button id="mentorCancelBtn" class="btn btn-secondary">Cancel</button>
+                <button id="mentorSubmitBtn" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>
+
+    <script src="/js/mentorDashboard.js"></script>
+    <script src="/js/theme.js"></script>
 </body>
 </html>
